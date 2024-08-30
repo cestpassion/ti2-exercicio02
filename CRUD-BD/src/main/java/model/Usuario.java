@@ -1,43 +1,44 @@
 package model;
 
 import java.util.Random;
+
 import dao.DAO;
 
-public class Music {
-    public int codigo;
+public class Usuario{
+	protected int codigo;
     private String nome;
-    private String artista;
-    private String genero;
+    private String email;
+    private String senha;
 
     public Random gerador = new Random();
 
-    public Music() {
+    public Usuario() {
         this.codigo = 0;
         this.nome = "";
-        this.artista = "";
-        this.genero = "";
+        this.email = "";
+        this.senha = "";
     }
 
-    public Music(String nome, String artista, String genero){
-        this.codigo = gerarCodigo();
+    public Usuario(String nome, String email, String senha){
+        setCodigo();
         this.nome = nome;
-        this.artista = artista;
-        this.genero = genero;
+        this.email = email;
+        this.senha = senha;
     }
     
-    public Music(int codigo){
+    public Usuario(int codigo){
         this.codigo = codigo;
     }
     
-    public Music(int codigo, String nome, String artista, String genero){
+    public Usuario(int codigo, String nome, String email, String senha){
         this.codigo = codigo;
         this.nome = nome;
-        this.artista = artista;
-        this.genero = genero;
+        this.email = email;
+        this.senha = senha;
     }
 
     // Início Gerar código
-    int gerarCodigo() {
+    public void setCodigo() {
         int newCodigo;
         gerador.setSeed(System.currentTimeMillis());
         
@@ -45,10 +46,10 @@ public class Music {
             newCodigo = gerador.nextInt() % 90000 + 10000;
         } while (verificaRepeticao(newCodigo) == 1);
     
-        return newCodigo;
+        this.codigo = newCodigo;
     }
 
-    int verificaRepeticao(int newCodigo) {
+    public int verificaRepeticao(int newCodigo) {
     	DAO dao = new DAO();
 		dao.conectar();
         
@@ -74,24 +75,24 @@ public class Music {
 		this.nome = nome;
 	}
 
-    public String getArtista() {
-		return artista;
+    public String getEmail() {
+		return email;
 	}
 
-    public void setArtista(String artista) {
-		this.artista = artista;
+    public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getGenero() {
-		return genero;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setGenero(String genero) {
-		this.genero = genero;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	@Override
 	public String toString() {
-		return "Music [codigo=" + codigo + ", nome=" + nome + ", artista=" + artista + ", genero=" + genero + "]";
+		return "Usuario [codigo=" + codigo + ", nome=" + nome + ", email=" + email + ", senha=" + senha + "]";
 	}	
 }

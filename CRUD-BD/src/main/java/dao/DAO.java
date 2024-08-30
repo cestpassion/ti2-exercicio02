@@ -105,7 +105,7 @@ public class DAO {
 
                 for(int i = 0; rs.next(); i++) {
                 	usuarios[i] = new Usuario(rs.getInt("codigo"));
-                	codigos[i] = usuarios[i].codigo;
+                	codigos[i] = usuarios[i].getCodigo();
                 }
             }
             st.close();
